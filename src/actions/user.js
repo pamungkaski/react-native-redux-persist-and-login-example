@@ -1,16 +1,11 @@
 /**
  * Created by iampamungkas on 9/22/17.
  */
-import deleteProperty from '../helper'
+import { deleteProperty } from '../helper'
 export const CREATE_USER_REQUEST = 'CREATE_USER_REQUEST'
 export const CREATE_USER_RESPONSE = 'CREATE_USER_RESPONSE'
-export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST'
-export const UPDATE_USER_RESPONSE = 'UPDATE_USER_RESPONE'
-export const DELETE_USER_REQUEST = 'DELETE_USER_REQUEST'
-export const DELETE_USER_RESPONSE = 'DELETE_USER_RESPONSE'
-export const CHECK_USERNAME_REQUEST = 'CHECK_USERNAME_REQUEST'
-export const CHECK_USERNAME_RESPONE = 'CHECK_USERNAME_RESPONE'
 
+// Create User Action
 createUserRequest = (credential) => {
     return {
         type: CREATE_USER_REQUEST,
@@ -27,7 +22,7 @@ createUserResponse = (credential, response) => {
     }
 }
 
-createUser = (credential) => {
+export const createUser = (credential) => {
     return dispatch => {
         dispatch(createUserRequest(credential))
         return Axios.post('https://genwis.herokuapp.com/itinerary',JSON.stringify(credential))
@@ -35,6 +30,9 @@ createUser = (credential) => {
     }
 }
 
+//Update User Action
+export const UPDATE_USER_REQUEST = 'UPDATE_USER_REQUEST'
+export const UPDATE_USER_RESPONSE = 'UPDATE_USER_RESPONE'
 updateUserRequest = (credential) => {
     return {
         type: UPDATE_USER_REQUEST,
@@ -51,7 +49,7 @@ updateUserResponse = (credential, response) => {
     }
 }
 
-deleteUser = (credential) => {
+export const updateUser = (credential) => {
     return dispatch => {
         dispatch(updateUserRequest(credential))
         return Axios.post('https://genwis.herokuapp.com/itinerary',JSON.stringify(credential))
@@ -59,6 +57,9 @@ deleteUser = (credential) => {
     }
 }
 
+//Delete User Action
+export const DELETE_USER_REQUEST = 'DELETE_USER_REQUEST'
+export const DELETE_USER_RESPONSE = 'DELETE_USER_RESPONSE'
 deleteUserRequest = (credential) => {
     return {
         type: DELETE_USER_REQUEST,
@@ -75,7 +76,7 @@ deleteUserResponse = (credential, response) => {
     }
 }
 
-deleteUser = (credential) => {
+export const deleteUser = (credential) => {
     return dispatch => {
         dispatch(deleteUserRequest(credential))
         return Axios.post('https://genwis.herokuapp.com/itinerary',JSON.stringify(credential))
@@ -83,7 +84,9 @@ deleteUser = (credential) => {
     }
 }
 
-
+// Check Username Action
+export const CHECK_USERNAME_REQUEST = 'CHECK_USERNAME_REQUEST'
+export const CHECK_USERNAME_RESPONE = 'CHECK_USERNAME_RESPONE'
 checkUsernameRequest = (username) => {
     return {
         type: CHECK_USERNAME_REQUEST,
@@ -91,7 +94,7 @@ checkUsernameRequest = (username) => {
     }
 }
 
-deleteUserResponse = (username, response) => {
+checkUsernameResponse = (username, response) => {
     return {
         type: CHECK_USERNAME_RESPONSE,
         username,
@@ -100,7 +103,7 @@ deleteUserResponse = (username, response) => {
     }
 }
 
-deleteUser = (username) => {
+export const checkUsername = (username) => {
     return dispatch => {
         dispatch(checkUsernameRequest(username))
         return Axios.post('https://genwis.herokuapp.com/itinerary',JSON.stringify(credential))

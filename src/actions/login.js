@@ -3,9 +3,12 @@
  */
 export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST'
 export const FORGOT_PASSWORD_RESPONSE = 'FORGOT_PASSWORD_RESPONSE'
+export const LOGIN_REQUEST = 'LOGIN_REQUEST'
 export const LOGIN_RESPONSE = 'LOGIN_RESPONSE'
 export const LOGOUT = 'LOGOUT'
 
+
+//Login Action
 loginRequest = (credential) => {
     return {
         type: LOGIN_REQUEST,
@@ -35,10 +38,12 @@ export const login = (credential) => {
 export const logout = (status) => {
     return {
         type: LOGOUT,
-        status: !status
+        status: status
     }
 }
 
+
+//Forgot Password Action
 forgotPasswordRequest = (credential) => {
     return {
         type: LOGIN_REQUEST,

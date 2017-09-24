@@ -86,7 +86,7 @@ export const deleteUser = (credential) => {
 
 // Check Username Action
 export const CHECK_USERNAME_REQUEST = 'CHECK_USERNAME_REQUEST'
-export const CHECK_USERNAME_RESPONE = 'CHECK_USERNAME_RESPONE'
+export const CHECK_USERNAME_RESPONSE = 'CHECK_USERNAME_RESPONE'
 checkUsernameRequest = (username) => {
     return {
         type: CHECK_USERNAME_REQUEST,

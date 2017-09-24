@@ -5,13 +5,13 @@ import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import { autroRehydrate } from 'redux-persist'
-import rootReducers from '../reducers/rootReducers'
+import rootReducer from '../reducers/rootReducers'
 
 const loggerMiddleware = createLogger()
 
 export default function configureStore(preloadedState) {
     return createStore(
-        rootReducers,
+        rootReducer,
         preloadedState,
         autroRehydrate,
         applyMiddleware(

@@ -12,10 +12,8 @@ import {
 
 export const forgotPassword = (
     state = {
-        email,
         isFetching:false,
         status: false,
-        message
     }, action
 ) => {
     switch (action.type) {
@@ -30,15 +28,15 @@ export const forgotPassword = (
                 status: action.status,
                 message: action.message
             }
+        default:
+            return state
     }
 }
 
 export const loginUser = (
     state = {
         isFetching: false,
-        profile: {},
         status: false,
-        message,
     }, action
 ) => {
     switch (action.type) {
@@ -48,12 +46,17 @@ export const loginUser = (
                 isFetching: true
             }
         case LOGIN_RESPONSE:
-            return {
+            return action.statu ? {
                 ...state,
                 isFetching: false,
                 status: action.status,
                 message: action.message,
-                profile: action.status ? action.profile : {}
+                profile: action.profile
+            } : {
+                ...state,
+                isFetching: false,
+                status: action.status,
+                message: action.message
             }
         case LOGOUT:
             return {

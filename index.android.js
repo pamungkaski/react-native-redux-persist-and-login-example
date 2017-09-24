@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
     AppRegistry,
-    View
+    View,
+    AsyncStorage
 } from 'react-native';
 import configureStore from './src/store/configureStore'
 import { Provider } from 'react-redux'
@@ -9,7 +10,7 @@ import HomeNavigation from './src/components/Home/views/HomeNavigation'
 import { persistStore } from 'redux-persist'
 
 const store = configureStore();
-if (typeof self === 'object') persistStore(store)
+persistStore(store, {storage: AsyncStorage, blacklist:['Home', 'Login']})
 export default class RegEdit extends Component {
   render() {
     return (

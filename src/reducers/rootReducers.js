@@ -16,7 +16,8 @@ import {
     updateData,
     deleteData
 } from './databaseReducer'
-import { NavigatorHome} from '../components/Home/navigationConf'
+import { NavigatorHome } from '../components/Home/navigationConf'
+import { NavigatorLogin } from '../components/Login/navigationConf'
 const rootReducer = combineReducers({
     createUser,
     updateUser,
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
     updateData,
     deleteData,
     Home: (state,action) => NavigatorHome.router.getStateForAction(action,state),
+    Login: (state,action) => NavigatorLogin.router.getStateForAction(action,state),
 })
 
 export default rootReducer

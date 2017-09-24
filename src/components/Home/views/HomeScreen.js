@@ -3,7 +3,7 @@
  */
 'use strict'
 import React, { Component } from 'react'
-import { View, Text, BackHandler } from 'react-native'
+import { View, Text, BackHandler, TouchableOpacity, StatusBar } from 'react-native'
 import { NavigationActions }  from 'react-navigation'
 export default class HomeScreen extends Component{
     static navigationOptions = {
@@ -27,10 +27,28 @@ export default class HomeScreen extends Component{
         }
     }
     render(){
+        const { navigation } = this.props
         return(
-            <View >
-                <Text> HELLLLO </Text>
+            <View style={container}>
+                <StatusBar backgroundColor="#ffffff"/>
+                <TouchableOpacity onPress={()=> navigation.navigate("LoginNavigation")}>
+                    <View  style={container}>
+                        <Text style={tap}> TAP ANYWHERE </Text>
+                    </View>
+                </TouchableOpacity>
             </View>
         )
     }
+}
+const tap = {
+    fontSize: 25,
+    fontFamily: 'Ubuntu',
+    color: '#2ecc71',
+    fontWeight: "bold"
+}
+const container = {
+    flex: 1,
+    backgroundColor: '#ffffff',
+    alignItems: "center",
+    justifyContent: 'center',
 }

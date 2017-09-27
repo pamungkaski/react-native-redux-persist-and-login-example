@@ -1,4 +1,4 @@
-# React Native login and Sqlite Example using Redux
+# React Native redux-persist and login example
 [![Build Status](https://travis-ci.org/pamungkaski/react-native-redux-persist-and-login-example.svg?branch=master)](https://travis-ci.org/pamungkaski/react-native-redux-persist-and-login-example)
 ## How to try
  * clone this repository

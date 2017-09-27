@@ -1,6 +1,7 @@
 /**
  * Created by iampamungkas on 9/21/17.
  */
+import { deleteProperty } from '../helper'
 export const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST'
 export const FORGOT_PASSWORD_RESPONSE = 'FORGOT_PASSWORD_RESPONSE'
 export const LOGIN_REQUEST = 'LOGIN_REQUEST'
@@ -16,22 +17,20 @@ loginRequest = (credential) => {
     }
 }
 
-loginResponse = (credential, response) => {
-    credential.password = ''
+loginResponse = (credential, userDatabase) => {
     return {
         type: LOGIN_RESPONSE,
-        credential,
-        status: response.status,
-        message: response.message,
-        profile: response.profile
+        credential: deleteProperty(credential, 'password'),
+        status: credential.password === userDatabase[credential.username].password,
     }
 }
 
-export const login = (credential) => {
+export const login = (credential, userDatabase) => {
     return dispatch => {
         dispatch(loginRequest(credential.username))
-        return Axios.post('https://genwis.herokuapp.com/itinerary',JSON.stringify(credential))
-            .then(response => dispatch(loginResponse(credential, response.data)))
+        // return Axios.post('URL',JSON.stringify(credential))
+        //     .then(response => dispatch(loginResponse(credential, response.data)))
+        return dispatch(loginResponse(credential, userDatabase))
     }
 }
 
@@ -62,7 +61,7 @@ forgotPasswordResponse = (credential, response) => {
 export const forgot = (credential) => {
     return dispatch => {
         dispatch(forgotPasswordRequest(credential.email))
-        return Axios.post('https://genwis.herokuapp.com/itinerary',JSON.stringify(credential))
+        return Axios.post('URL',JSON.stringify(credential))
             .then(response => dispatch(forgotPasswordRespone(credential.email, response.data)))
     }
 }

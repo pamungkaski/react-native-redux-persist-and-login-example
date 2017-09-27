@@ -1,62 +1,58 @@
 /**
- * Created by iampamungkas on 9/25/17.
+ * Created by iampamungkas on 9/27/17.
  */
 'use strict'
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { View, Text, TextInput, Dimensions, Button, TouchableOpacity, BackHandler} from 'react-native'
 import { createUser } from '../../../actions/user'
+import { logout } from '../../../actions/login'
 const mapStateToProps = (state) => {
     return {
-        user: state.user.data
+        user: state.user.data,
+        loginUser: state.loginUser
     }
 }
-class RegisterScreen extends Component{
+class ProfileScreen extends Component{
     static navigationOptions = {
         header: null,
     }
-    componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', ()=>this.props.navigation.navigate('LoginScreen'))
-    }
-    componentWillUnmount() {
-        BackHandler.removeEventListener('hardwareBackPress', ()=>this.props.navigation.navigate('LoginScreen'))
-    }
-    onPress = (credential) => {
+    onPressB1 = (credential) => {
         const { navigation, user, dispatch } = this.props
         const data = user
         data[credential.username] = credential
         dispatch(createUser(data))
-        navigation.navigate('LoginScreen')
+    }
+    onPressB2 = () => {
+        const { navigation,dispatch } = this.props
+        dispatch(logout(false))
+        navigation.navigate('HomeScreen')
     }
     render(){
-        const { navigation } = this.props
-        const credential = {
-            username:'',
-            password:'',
-            name:'',
-            email:''
-        }
+        const { navigation, loginUser, user } = this.props
+        const credential = {...user[loginUser.credential.username]}
         return(
             <View style={container}>
                 <View style={container1}>
-                    <Text style={title}>REGISTRATION</Text>
+                    <Text style={title}>Profile</Text>
                     <View>
                         <Text>Username</Text>
-                        <TextInput onChangeText={(text) => credential.username = text} returnKeyType={'next'} onSubmitEditing={()=> this.refs.password.focus()}/>
+                        <TextInput style={text} placeholderTextColor='black' placeholder={credential.username} editable={false} ref="username"/>
                     </View>
                     <View>
                         <Text>Password</Text>
-                        <TextInput onChangeText={(text) => credential.password = text} ref="password" returnKeyType={'next'} secureTextEntry={true} onSubmitEditing={()=> this.refs.name.focus()}/>
+                        <TextInput style={text} placeholderTextColor='black' placeholder={'YOUR_CURRENT_PASSWORD'} onChangeText={(text) => credential.password = text} ref="password" secureTextEntry={true}/>
                     </View>
                     <View>
                         <Text>Full name</Text>
-                        <TextInput onChangeText={(text) => credential.name = text} ref="name" returnKeyType={'next'} onSubmitEditing={()=> this.refs.email.focus()}/>
+                        <TextInput style={text} placeholderTextColor='black' placeholder={credential.name} onChangeText={(text) => credential.name = text} ref="name"/>
                     </View>
                     <View>
                         <Text>Email</Text>
-                        <TextInput onChangeText={(text) => credential.email = text} ref="email" keyboardType={'email-address'}/>
+                        <TextInput style={text} placeholderTextColor='black' placeholder={credential.email} onChangeText={(text) => credential.email = text} ref="email" keyboardType={'email-address'}/>
                     </View>
-                    <View style={button}><Button color={'#2ecc71'} title="REGISTER" onPress={()=>this.onPress(credential)}/></View>
+                    <View style={button}><Button color={'#2ecc71'} title="Save" onPress={()=>this.onPressB1(credential)}/></View>
+                    <View style={button}><Button color={'#2ecc71'} title="Logout" onPress={()=>this.onPressB2()}/></View>
                 </View>
             </View>
         )
@@ -96,4 +92,8 @@ const button = {
     width: 0.6 * d.width,
     marginLeft: 0.1 * d.width
 }
-export default connect(mapStateToProps)(RegisterScreen)
+const text = {
+    fontSize: 18,
+    color: '#000000',
+}
+export default connect(mapStateToProps)(ProfileScreen)

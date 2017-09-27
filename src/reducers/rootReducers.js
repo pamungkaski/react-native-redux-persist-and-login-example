@@ -3,32 +3,31 @@
  */
 import { combineReducers } from 'redux'
 import {
-    createUser,
-    updateUser,
-    deleteUser,
+    user,
     checkUsername
 } from './userReducer'
 import {
     loginUser
 } from './loginReducer'
 import {
-    createData,
-    updateData,
-    deleteData
+    database
 } from './databaseReducer'
 import { NavigatorHome } from '../components/Home/navigationConf'
 import { NavigatorLogin } from '../components/Login/navigationConf'
+import { NavigatorDashboard } from '../components/Dashboard/navigationConf'
+import { NavigatorItem } from '../components/Item/navigationConf'
+import { NavigatorProfile } from '../components/Profile/navigationConf'
 const rootReducer = combineReducers({
-    createUser,
-    updateUser,
-    deleteUser,
+    user,
     checkUsername,
     loginUser,
-    createData,
-    updateData,
-    deleteData,
+    database,
     Home: (state,action) => NavigatorHome.router.getStateForAction(action,state),
     Login: (state,action) => NavigatorLogin.router.getStateForAction(action,state),
+    Dashboard: (state,action) => NavigatorDashboard.router.getStateForAction(action,state),
+    Item: (state,action) => NavigatorItem.router.getStateForAction(action,state),
+    Profile: (state,action) => NavigatorProfile.router.getStateForAction(action,state)
+
 })
 
 export default rootReducer

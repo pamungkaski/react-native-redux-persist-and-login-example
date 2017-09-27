@@ -46,24 +46,23 @@ export const loginUser = (
                 isFetching: true
             }
         case LOGIN_RESPONSE:
-            return action.statu ? {
+            return action.status ? {
                 ...state,
                 isFetching: false,
+                credential: action.credential,
                 status: action.status,
-                message: action.message,
-                profile: action.profile
+                message: "Login Success",
             } : {
                 ...state,
                 isFetching: false,
                 status: action.status,
-                message: action.message
+                message: "Login Fail"
             }
         case LOGOUT:
             return {
                 ...state,
                 status: false,
-                message:'',
-                profile:{}
+                credential: {}
             }
         default:
             return state

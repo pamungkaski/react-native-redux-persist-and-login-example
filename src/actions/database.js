@@ -5,80 +5,86 @@ import { deleteProperty } from '../helper'
 export const CREATE_DATA_REQUEST = 'CREATE_DATA_REQUEST'
 export const CREATE_DATA_RESPONSE = 'CREATE_DATA_RESPONSE'
 // Create Data Action
-createDataRequest = (credential) => {
+createDataRequest = (data) => {
     return {
         type: CREATE_DATA_REQUEST,
-        credential: deleteProperty(credential, 'password')
+        data,
     }
 }
 
-createDataResponse = (credential, response) => {
+createDataResponse = (data) => {
     return {
         type: CREATE_DATA_RESPONSE,
-        credential: deleteProperty(credential, 'password'),
-        status: response.status,
-        message: response.message
+        data,
     }
 }
 
-export const createData = (credential) => {
+export const createData = (data) => {
     return dispatch => {
-        dispatch(createDataRequest(credential))
-        return Axios.post('https://genwis.herokuapp.com/itinerary',JSON.stringify(credential))
-            .then(response => dispatch(createDataResponse(credential, response.data)))
+        // Sorting
+        const keys = Object.keys(data)
+        keys.sort()
+        const dummy = {}
+        const len = keys.length;
+        for (i = 0; i < len; i++) {
+            dummy[keys[i]] = data[keys[i]]
+        }
+
+        dispatch(createDataRequest(dummy))
+        // return Axios.post('URL',JSON.stringify(data))
+        //     .then(response => dispatch(createDataResponse(data, response.data)))
+        return dispatch(createDataResponse(dummy))
     }
 }
 
 //Update Data Action
 export const UPDATE_DATA_REQUEST = 'UPDATE_DATA_REQUEST'
 export const UPDATE_DATA_RESPONSE = 'UPDATE_DATA_RESPONE'
-updateDataRequest = (credential) => {
+updateDataRequest = (data) => {
     return {
         type: UPDATE_DATA_REQUEST,
-        credential: deleteProperty(credential, 'password')
+        data
     }
 }
 
-updateDataResponse = (credential, response) => {
+updateDataResponse = (data) => {
     return {
         type: UPDATE_DATA_RESPONSE,
-        credential: deleteProperty(credential, 'password'),
-        status: response.status,
-        message: response.message
+        data: data
     }
 }
 
-export const updateData = (credential) => {
+export const updateData = (data) => {
     return dispatch => {
-        dispatch(updateDataRequest(credential))
-        return Axios.post('https://genwis.herokuapp.com/itinerary',JSON.stringify(credential))
-            .then(response => dispatch(updateDataResponse(credential, response.data)))
+        dispatch(updateDataRequest(data))
+        // return Axios.post('URL',JSON.stringify(data))
+        //     .then(response => dispatch(createDataResponse(data, response.data)))
+        return dispatch(createDataResponse)
     }
 }
 
 //Delete Data Action
 export const DELETE_DATA_REQUEST = 'DELETE_DATA_REQUEST'
 export const DELETE_DATA_RESPONSE = 'DELETE_DATA_RESPONSE'
-deleteDataRequest = (credential) => {
+deleteDataRequest = (data) => {
     return {
         type: DELETE_DATA_REQUEST,
-        credential: deleteProperty(credential, 'password')
+        data
     }
 }
 
-deleteDataResponse = (credential, response) => {
+deleteDataResponse = (data) => {
     return {
         type: DELETE_DATA_RESPONSE,
-        credential: deleteProperty(credential, 'password'),
-        status: response.status,
-        message: response.message
+        data: data
     }
 }
 
-export const deleteData = (credential) => {
+export const deleteData = (data) => {
     return dispatch => {
-        dispatch(deleteDataRequest(credential))
-        return Axios.post('https://genwis.herokuapp.com/itinerary',JSON.stringify(credential))
-            .then(response => dispatch(deleteDataResponse(credential, response.data)))
+        dispatch(deleteDataRequest(data))
+        // return Axios.post('URL',JSON.stringify(data))
+        //     .then(response => dispatch(createDataResponse(data, response.data)))
+        return dispatch(createDataResponse)
     }
 }

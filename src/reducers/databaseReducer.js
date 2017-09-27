@@ -9,11 +9,10 @@ import {
     DELETE_DATA_REQUEST,
     DELETE_DATA_RESPONSE
 } from '../actions/database'
-
-export const createData = (
+export const database = (
     state = {
         isFetching: false,
-        status: false,
+        data: {}
     }, action
 ) => {
     switch (action.type) {
@@ -26,22 +25,8 @@ export const createData = (
             return {
                 ...state,
                 isFetching: false,
-                status: action.status,
-                message: action.message
+                data: action.data
             }
-        default:
-            return state
-    }
-}
-
-
-export const updateData = (
-    state = {
-        isFetching: false,
-        status: false,
-    }, action
-) => {
-    switch (action.type) {
         case UPDATE_DATA_REQUEST:
             return {
                 ...state,
@@ -51,21 +36,8 @@ export const updateData = (
             return {
                 ...state,
                 isFetching: false,
-                status: action.status,
-                message: action.message
+                data: action.data
             }
-        default:
-            return state
-    }
-}
-
-export const deleteData = (
-    state = {
-        isFetching: false,
-        status: false,
-    }, action
-) => {
-    switch (action.type) {
         case DELETE_DATA_REQUEST:
             return {
                 ...state,
@@ -75,8 +47,7 @@ export const deleteData = (
             return {
                 ...state,
                 isFetching: false,
-                status: action.status,
-                message: action.message
+                data: action.data
             }
         default:
             return state

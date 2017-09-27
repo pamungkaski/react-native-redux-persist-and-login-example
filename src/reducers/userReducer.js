@@ -12,10 +12,11 @@ import {
     CHECK_USERNAME_RESPONSE
 } from '../actions/user'
 
-export const createUser = (
+export const user = (
     state = {
         isFetching: false,
         status: false,
+        data:{}
     }, action
 ) => {
     switch (action.type) {
@@ -29,21 +30,9 @@ export const createUser = (
                 ...state,
                 isFetching: false,
                 status: action.status,
+                data: action.credential,
                 message: action.message
             }
-        default:
-            return state
-    }
-}
-
-
-export const updateUser = (
-    state = {
-        isFetching: false,
-        status: false,
-    }, action
-) => {
-    switch (action.type) {
         case UPDATE_USER_REQUEST:
             return {
                 ...state,
@@ -56,18 +45,6 @@ export const updateUser = (
                 status: action.status,
                 message: action.message
             }
-        default:
-            return state
-    }
-}
-
-export const deleteUser = (
-    state = {
-        isFetching: false,
-        status: false,
-    }, action
-) => {
-    switch (action.type) {
         case DELETE_USER_REQUEST:
             return {
                 ...state,
@@ -84,7 +61,6 @@ export const deleteUser = (
             return state
     }
 }
-
 export const checkUsername = (
     state = {
         isFetching: false,

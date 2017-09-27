@@ -3,9 +3,16 @@
  */
 'use strict'
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { View, Text, BackHandler, TouchableOpacity, StatusBar } from 'react-native'
 import { NavigationActions }  from 'react-navigation'
-export default class HomeScreen extends Component{
+const mapStateToProps = (state) => {
+    return {
+        loginUser: state.loginUser
+    }
+}
+
+class HomeScreen extends Component{
     static navigationOptions = {
         header: null,
     }
@@ -31,7 +38,7 @@ export default class HomeScreen extends Component{
         return(
             <View style={container}>
                 <StatusBar backgroundColor="#ffffff"/>
-                <TouchableOpacity onPress={()=> navigation.navigate("LoginNavigation")}>
+                <TouchableOpacity onPress={()=> this.props.loginUser.status ? navigation.navigate("DashboardNavigation") : navigation.navigate("LoginNavigation")}>
                     <View  style={container}>
                         <Text style={tap}> TAP ANYWHERE </Text>
                     </View>
@@ -52,3 +59,4 @@ const container = {
     alignItems: "center",
     justifyContent: 'center',
 }
+export default connect(mapStateToProps)(HomeScreen)

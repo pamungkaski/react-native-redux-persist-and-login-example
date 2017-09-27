@@ -9,24 +9,23 @@ export const CREATE_USER_RESPONSE = 'CREATE_USER_RESPONSE'
 createUserRequest = (credential) => {
     return {
         type: CREATE_USER_REQUEST,
-        credential: deleteProperty(credential, 'password')
+        credential: credential
     }
 }
 
-createUserResponse = (credential, response) => {
+createUserResponse = (credential) => {
     return {
         type: CREATE_USER_RESPONSE,
-        credential: deleteProperty(credential, 'password'),
-        status: response.status,
-        message: response.message
+        credential: credential,
     }
 }
 
 export const createUser = (credential) => {
     return dispatch => {
         dispatch(createUserRequest(credential))
-        return Axios.post('https://genwis.herokuapp.com/itinerary',JSON.stringify(credential))
-            .then(response => dispatch(createUserResponse(credential, response.data)))
+        // return Axios.post('URL',JSON.stringify(credential))
+        //     .then(response => dispatch(createUserResponse(credential, response.data)))
+        return dispatch(createUserResponse(credential))
     }
 }
 
@@ -52,7 +51,7 @@ updateUserResponse = (credential, response) => {
 export const updateUser = (credential) => {
     return dispatch => {
         dispatch(updateUserRequest(credential))
-        return Axios.post('https://genwis.herokuapp.com/itinerary',JSON.stringify(credential))
+        return Axios.post('URL',JSON.stringify(credential))
             .then(response => dispatch(updateUserResponse(credential, response.data)))
     }
 }
@@ -79,7 +78,7 @@ deleteUserResponse = (credential, response) => {
 export const deleteUser = (credential) => {
     return dispatch => {
         dispatch(deleteUserRequest(credential))
-        return Axios.post('https://genwis.herokuapp.com/itinerary',JSON.stringify(credential))
+        return Axios.post('URL',JSON.stringify(credential))
             .then(response => dispatch(deleteUserResponse(credential, response.data)))
     }
 }
@@ -106,7 +105,7 @@ checkUsernameResponse = (username, response) => {
 export const checkUsername = (username) => {
     return dispatch => {
         dispatch(checkUsernameRequest(username))
-        return Axios.post('https://genwis.herokuapp.com/itinerary',JSON.stringify(credential))
+        return Axios.post('URL',JSON.stringify(credential))
             .then(response => dispatch(checkUsernameResponse(username, response.data)))
     }
 }

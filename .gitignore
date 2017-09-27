@@ -52,3 +52,4 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
 !/src/actions/database.js
+!/src/components/Login/views/LoginScreen.js

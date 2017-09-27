@@ -55,7 +55,6 @@ const title = {
     marginTop: 0.175 * d.height,
     marginBottom: 0.05 * d.height,
     fontSize: 30,
-    fontFamily: 'Ubuntu',
     color: '#2ecc71',
     fontWeight: "bold",
     textAlign: 'center'

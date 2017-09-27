@@ -49,7 +49,6 @@ class HomeScreen extends Component{
 }
 const tap = {
     fontSize: 25,
-    fontFamily: 'Ubuntu',
     color: '#2ecc71',
     fontWeight: "bold"
 }

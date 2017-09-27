@@ -78,11 +78,11 @@ class LoginScreen extends Component{
                         <Text style={title}>LOGIN</Text>
                         <View>
                             <Text>Username</Text>
-                            <TextInput onChangeText={(text) => credential.username = text} onSubmitEditing={() => this.refs.password.focus()} returnKeyType={'next'}/>
+                            <TextInput autoCapitalize={'none'} style={{height: 30, borderColor: 'green', borderWidth: 1}} onChangeText={(text) => credential.username = text} onSubmitEditing={() => this.refs.password.focus()} returnKeyType={'next'}/>
                         </View>
                         <View>
                             <Text>Password</Text>
-                            <TextInput ref="password" onChangeText={(text) => credential.password = text} onSubmitEditing={() => this.onPress(credential)} secureTextEntry={true}/>
+                            <TextInput autoCapitalize={'none'} style={{height: 30, borderColor: 'green', borderWidth: 1}} ref="password" onChangeText={(text) => credential.password = text} onSubmitEditing={() => this.onPress(credential)} secureTextEntry={true}/>
                         </View>
                         <TouchableOpacity onPress={() => navigation.navigate("ForgetScreen")}>
                             <View style={row2}>
@@ -128,7 +128,6 @@ const container = {
 const title = {
     marginBottom: 0.05 * d.height,
     fontSize: 50,
-    fontFamily: 'Ubuntu',
     color: '#2ecc71',
     fontWeight: "bold",
     textAlign: 'center'

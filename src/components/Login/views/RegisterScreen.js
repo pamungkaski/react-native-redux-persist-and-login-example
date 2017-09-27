@@ -86,7 +86,6 @@ const container = {
 const title = {
     marginBottom: 0.05 * d.height,
     fontSize: 30,
-    fontFamily: 'Ubuntu',
     color: '#2ecc71',
     fontWeight: "bold",
     textAlign: 'center'
